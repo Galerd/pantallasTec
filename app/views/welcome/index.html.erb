@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+</head>
+<body>
+    <img name="slider" width="100%" height="100%">    
+    <script>
+        window.addEventListener('load', function(){
+        console.log('cargado');
+
+        var img = [];
+        img [0] = '<%= asset_path('1.jpg') %>';
+        img [1] = '<%= asset_path('2.jpg') %>';
+        img [2] = '<%= asset_path('3.jpg') %>';
+        img [3] = '<%= asset_path('4.jpg') %>';
+        img [4] = '<%= asset_path('5.jpg') %>';
+
+        var i = 0;
+        var time = 2000;
+
+        function slide(){
+            
+            document.slider.src = img [i];
+            if(i < 4){
+                i++;
+            }else{
+                i = 0;
+            }
+        }
+
+        setInterval(slide, time);
+
+    });
+    </script>
+</body>
+</html>
