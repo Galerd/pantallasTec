@@ -1,2 +1,3 @@
-class Publication < ApplicationRecord
+class Publication < ApplicationRecord  
+    mount_uploader :picture, PictureUploader 
 end

@@ -13,19 +13,18 @@
         console.log('cargado');
 
         var img = [];
-        img [0] = '<%= asset_path('1.jpg') %>';
-        img [1] = '<%= asset_path('2.jpg') %>';
-        img [2] = '<%= asset_path('3.jpg') %>';
-        img [3] = '<%= asset_path('4.jpg') %>';
-        img [4] = '<%= asset_path('5.jpg') %>';
-
+        '<% count = 0 %>'
+        '<% @publications.each do |publication| %>'        
+        img ['<%= count %>'] = '<%= publication.picture.thumb.url %>';
+        '<% count = count + 1 %>'
+        '<% end %>'
         var i = 0;
         var time = 4000;
 
         function slide(){
             
             document.slider.src = img [i];
-            if(i < 4){
+            if(i < <%= count - 1 %>){
                 i++;
             }else{
                 i = 0;
@@ -35,6 +34,6 @@
         setInterval(slide, time);
 
     });
-    </script>
+    </script>    
 </body>
 </html>

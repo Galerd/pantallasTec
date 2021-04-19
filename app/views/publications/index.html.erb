@@ -1,13 +1,19 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
-
-  <h1>Publications</h1>
-
+  <p id="notice"><%= notice %></p>  
+  <ul class="nav justify-content-end">
+    <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to 'Salir', destroy_user_session_path, method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+  <h1>Publications</h1>  
   <table>
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Image</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -15,8 +21,9 @@
     <tbody>
       <% @publications.each do |publication| %>
         <tr>
-          <td><%= publication.name %></td>
+          <td><%= publication.name %></td>          
           <td><%= publication.description %></td>
+          <td><%= image_tag publication.picture.thumb.url, class: "figure-img img-fluid rounded" %></td>
           <td><%= link_to 'Show', publication %></td>
           <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
           <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
