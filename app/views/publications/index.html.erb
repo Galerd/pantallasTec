@@ -23,7 +23,7 @@
         <tr>
           <td><%= publication.name %></td>          
           <td><%= publication.description %></td>
-          <td><%= image_tag publication.picture.thumb.url, class: "figure-img img-fluid rounded" %></td>
+          <td class='figure-img img-fluid rounded'><%= image_tag(url_for(publication.picture)) %></td>
           <td><%= link_to 'Show', publication %></td>
           <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
           <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>

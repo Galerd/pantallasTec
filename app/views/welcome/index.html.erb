@@ -15,7 +15,7 @@
         var img = [];
         '<% count = 0 %>'
         '<% @publications.each do |publication| %>'        
-        img ['<%= count %>'] = '<%= publication.picture.thumb.url %>';
+        img ['<%= count %>'] = '<%= url_for(publication.picture) %>';
         '<% count = count + 1 %>'
         '<% end %>'
         var i = 0;
