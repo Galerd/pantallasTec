@@ -23,14 +23,6 @@
   </div>
 </nav>
 <div class="container">
-  <p id="notice"><%= notice %></p>  
-  <ul class="nav justify-content-end">
-    <% if user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to 'Salir', destroy_user_session_path, method: :delete %>
-      </li>
-    <% end %>
-  </ul>
   <h1>Publications</h1> 
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <% @publications.each do |publication| %>
