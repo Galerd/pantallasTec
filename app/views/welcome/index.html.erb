@@ -1,39 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slideshow</title>
+  <title>Inicio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <style>
+  .full-screen {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    }
+  </style>
 </head>
 <body>
-    <img name="slider" width="100%" height="100%">    
-    <script>
-        window.addEventListener('load', function(){
-        console.log('cargado');
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">    
+        <% cont = 0 %>
+        <% act = 'active' %>        
+        <% @publications.each do |publication| %>
+            <li data-target="#myCarousel" data-slide-to="<%= cont %>" class="
+            <% if cont == 0 %>
+            <%= act %>            
+            <% end %>"></li>
+            <% cont = cont+1 %>
+        <% end %>
+    </ol>
 
-        var img = [];
-        '<% count = 0 %>'
-        '<% @publications.each do |publication| %>'        
-        img ['<%= count %>'] = '<%= url_for(publication.picture) %>';
-        '<% count = count + 1 %>'
-        '<% end %>'
-        var i = 0;
-        var time = 4000;
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <% cont = 0 %>
+        <% @publications.each do |publication| %>
+            <div class="carousel-item 
+            <% if cont == 0 %>
+            <%= act %> 
+            <% end %>">
+                <%= image_tag url_for(publication.picture), class: "d-block w-100" %>
+                <% cont = cont+1 %>
+            </div>
+        <% end %>
+    </div>
 
-        function slide(){
-            
-            document.slider.src = img [i];
-            if(i < <%= count - 1 %>){
-                i++;
-            }else{
-                i = 0;
-            }
-        }
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+<script>
+var $item = $('.carousel-item'); 
+var $wHeight = $(window).height();
+$item.eq(0).addClass('active');
+$item.height($wHeight); 
+$item.addClass('full-screen');
 
-        setInterval(slide, time);
+$('.carousel img').each(function() {
+  var $src = $(this).attr('src');
+  var $color = $(this).attr('data-color');
+  $(this).parent().css({
+    'background-image' : 'url(' + $src + ')',
+    'background-color' : $color
+  });
+  $(this).remove();
+});
 
-    });
-    </script>    
+$(window).on('resize', function (){
+  $wHeight = $(window).height();
+  $item.height($wHeight);
+});
+
+$('.carousel').carousel({
+  interval: 6000,
+  pause: "false"
+});
+</script>
 </body>
 </html>
